@@ -55,7 +55,7 @@ export default function AboutPage() {
       <section className="mb-12">
         <h2 className="text-3xl font-semibold mb-4">Motto</h2>
         <div className="bg-blue-50 p-6 rounded-lg">
-          <h3 className="text-2xl font-medium mb-2 text-center">"S.I.G.E.R"</h3>
+          <h3 className="text-2xl font-medium mb-2 text-center">S.I.G.E.R</h3>
           <p className="text-lg text-gray-700 text-center">
             (SERVICE EXCELLENT, INTEGRITAS, GESIT, EMPATI, RAMAH)
           </p>

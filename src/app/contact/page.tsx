@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Metadata } from 'next';
-import { MapPin, Phone, Mail, Clock, Building } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Hubungi Kami | RS Airan Raya (Dev)',

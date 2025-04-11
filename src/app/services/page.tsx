@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import { 
-  Hospital, 
   Stethoscope, 
   HeartPulse, 
   Activity, 
@@ -9,14 +8,11 @@ import {
   Brain, 
   Eye, 
   Ear, 
-  ShieldCheck, 
   FlaskConical, 
   Microscope, 
   Ambulance,
-  Syringe,
   Bed,
   Building2,
-  Cross,
   Pill,
   Utensils,
   Car

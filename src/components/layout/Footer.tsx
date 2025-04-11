@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { MapPin, Phone, Mail, Clock, Facebook, Instagram, Youtube } from 'lucide-react';
+import {  Phone, Mail, Facebook, Instagram, Youtube } from 'lucide-react';
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -102,7 +102,7 @@ const Footer: React.FC = () => {
 
         {/* Motto */}
         <div className="text-center mb-8 py-4 border-y border-green-800">
-          <p className="font-semibold text-white mb-2">MOTTO: "S.I.G.E.R"</p>
+          <p className="font-semibold text-white mb-2">MOTTO: S.I.G.E.R</p>
           <p className="text-sm">SERVICE EXCELLENT, INTEGRITAS, GESIT, EMPATI, RAMAH</p>
         </div>
 

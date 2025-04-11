@@ -1,8 +1,9 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { getRecentPosts } from '@/lib/api';
 import { WpPost } from '@/types/wordpress';
-import { Hospital, Users, Clock, MapPin, Phone, HeartPulse, Activity, Baby, ArrowRight, Syringe, Brain } from 'lucide-react';
+import { Hospital, Users, Clock, MapPin, Phone, Activity, ArrowRight, Syringe, Brain } from 'lucide-react';
 
 export default async function Home() {
   const recentPosts: WpPost[] = await getRecentPosts(3);
@@ -38,7 +39,13 @@ export default async function Home() {
       {/* Hero Section */}
       <section className="relative text-center py-24 md:py-32 px-4 overflow-hidden rounded-lg bg-green-50">
         <div className="relative z-10 justify-center">
-          <img className="mx-auto mb-6 text-green-700" style={{ width: '150px', height: 'auto' }} src="Rumah_Sakit_Airan_Raya.png" alt="RS Airan Raya Logo" />
+          <Image
+            src="/Rumah_Sakit_Airan_Raya.png"
+            alt="RS Airan Raya Logo"
+            width={150}
+            height={150}
+            className="mx-auto mb-6"
+          />
           <h1 className="md:text-5xl">RS Airan Raya</h1>
           <p className="text-lg md:text-xl mb-8 text-gray-600 max-w-2xl mx-auto">
             Menjadi Rumah Sakit Terdepan Dalam Memberikan Pelayanan Kesehatan Yang Bermutu di Lampung
@@ -71,7 +78,7 @@ export default async function Home() {
       {/* Motto Section - NEW */}
       <section className="bg-green-50 py-16">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-8">Motto "S.I.G.E.R"</h2>
+          <h2 className="text-3xl font-bold mb-8">Motto: S.I.G.E.R</h2>
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
             {[
               { title: "Service Excellent", desc: "Pelayanan Terbaik" },
