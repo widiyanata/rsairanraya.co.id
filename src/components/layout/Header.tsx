@@ -19,7 +19,7 @@ const Header: React.FC = () => {
     { href: "/schedule", label: "Jadwal Dokter" },
     { href: "/facilities", label: "Fasilitas" },
     { href: "/contact", label: "Kontak" },
-    { href: "/posts", label: "Berita" },
+    // { href: "/posts", label: "Berita" },
   ];
 
   const toggleMobileMenu = () => {
