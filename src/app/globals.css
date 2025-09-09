@@ -125,6 +125,109 @@
   ::-webkit-scrollbar-thumb:hover {
     background: theme('colors.green.700');
   }
+  
+  /* Mobile menu slide-in animation */
+  @keyframes slideInRight {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+  
+  /* Backdrop animation */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  /* Navigation enhancements */
+  .nav-dropdown {
+    transform: translateY(-10px);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .nav-dropdown.show {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  /* Footer card hover effects */
+  .footer-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .footer-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+  
+  /* Search overlay animations */
+  .search-overlay {
+    animation: fadeIn 0.2s ease-out;
+  }
+  
+  .search-modal {
+    animation: fade-in 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  /* Mobile menu animations */
+  .mobile-menu-enter {
+    animation: slideInRight 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .mobile-backdrop-enter {
+    animation: fadeIn 0.2s ease-out;
+  }
+  
+  /* Performance optimizations */
+  .will-change-transform {
+    will-change: transform;
+  }
+  
+  .will-change-opacity {
+    will-change: opacity;
+  }
+  
+  /* Focus visible for better accessibility */
+  .focus-visible {
+    outline: 2px solid theme('colors.green.500');
+    outline-offset: 2px;
+  }
+  
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    .bg-green-50 {
+      background-color: theme('colors.green.100');
+    }
+    .text-gray-600 {
+      color: theme('colors.gray.900');
+    }
+  }
+  
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-pulse,
+    .animate-bounce,
+    .animate-fade-in,
+    .animate-slide-in-left,
+    .animate-slide-in-right {
+      animation: none;
+    }
+    
+    * {
+      transition-duration: 0.01s !important;
+      animation-duration: 0.01s !important;
+    }
+  }
 }
 
 body {
