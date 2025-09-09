@@ -1,51 +1,81 @@
+// Keep as Server Component - remove 'use client'
 import React from 'react';
 import type { Metadata } from 'next';
-import { Users, Stethoscope, HeartPulse, Baby, Activity } from 'lucide-react'; // Import relevant icons
+import DoctorFilterList from '@/components/doctors/DoctorFilterList'; // Import the new client component
 
+// Metadata export is allowed in Server Components
 export const metadata: Metadata = {
-  title: 'Tim Dokter Kami | RS Airan Raya (Dev)',
-  description: 'Kenali tim dokter spesialis kami yang berdedikasi di RS Airan Raya.',
+  title: 'Cari Dokter | RS Airan Raya',
+  description: 'Cari dan filter dokter spesialis serta dokter gigi kami berdasarkan nama atau bidang keahlian di RS Airan Raya.',
 };
 
-// Static doctor data (fictional)
-const staticDoctors = [
-  { name: "Dr. Budi Santoso, Sp.JP", specialization: "Spesialis Jantung & Pembuluh Darah", icon: HeartPulse, description: "Fokus pada diagnosis dan pengobatan penyakit kardiovaskular." },
-  { name: "Dr. Citra Lestari, Sp.OG", specialization: "Spesialis Kebidanan & Kandungan", icon: Baby, description: "Ahli dalam kesehatan reproduksi wanita, kehamilan, dan persalinan." },
-  { name: "Dr. Ahmad Hidayat, Sp.B", specialization: "Spesialis Bedah Umum", icon: Activity, description: "Melakukan berbagai prosedur bedah umum dan darurat." },
-  { name: "Dr. Dewi Anggraini, Sp.PD", specialization: "Spesialis Penyakit Dalam", icon: Stethoscope, description: "Menangani berbagai penyakit organ dalam pada pasien dewasa." },
-  { name: "Dr. Eko Prasetyo, Sp.A", specialization: "Spesialis Anak", icon: Baby, description: "Memberikan perawatan kesehatan komprehensif untuk bayi dan anak." },
-  { name: "Dr. Farah Nabila, Sp.M", specialization: "Spesialis Mata", icon: Stethoscope, description: "Diagnosis dan penanganan gangguan penglihatan dan penyakit mata." }, // Using Stethoscope as placeholder icon
-  { name: "Dr. Gilang Permana, Sp.OT", specialization: "Spesialis Ortopedi", icon: Stethoscope, description: "Fokus pada cedera dan penyakit tulang, sendi, dan otot." }, // Using Stethoscope as placeholder icon
-  { name: "Dr. Hana Wijaya, Sp.N", specialization: "Spesialis Saraf", icon: Stethoscope, description: "Menangani gangguan sistem saraf seperti stroke, epilepsi, dan lainnya." }, // Using Stethoscope as placeholder icon
+interface Doctor {
+  name: string;
+  position: string;
+}
+
+// Real doctor data from data-dokter.md
+const realDoctors: Doctor[] = [
+  { name: 'dr. Imron, Sp. PD', position: 'Dokter Spesialis Penyakit Dalam' },
+  { name: 'dr. Riana Handayani, Sp. JP', position: 'Dokter Spesialis Jantung' },
+  { name: 'dr. Hardha Pandhu Winata, Sp. B', position: 'Dokter Spesialis Bedah' },
+  { name: 'dr. Irsyad Alamsyah Harahap, Sp. B', position: 'Dokter Spesialis Bedah' },
+  { name: 'dr. Henny Kartika Handayani, Sp. OG', position: 'Dokter Spesialis Obygyn' },
+  { name: 'dr. Toni Prasetia, Sp.PD', position: 'Dokter Spesialis Penyakit Dalam' },
+  { name: 'dr. Fofi Livia Ariani, Sp. OG', position: 'Dokter Spesialis Obygyn' },
+  { name: 'dr. Khairani, Sp.THT-KL', position: 'Dokter Spesialis Ilmu Kesehatan Tht Kl (Sp.Tht-Kl)' },
+  { name: 'dr. Suharsono, Sp.N', position: 'Dokter Spesialis Neourologi' },
+  { name: 'dr. Indra Faisal, Sp. An', position: 'Dokter Spesialis Anestesi' },
+  { name: 'dr. Elvi Suryati, Sp.A', position: 'Dokter Spesialis Anak' },
+  { name: 'dr.Fidha Rahmayani, Sp.S', position: 'Dokter Spesialis Saraf' },
+  { name: 'dr. Mohamad Bayu Sahadewa, SP.OT', position: 'Dokter Spesialis Ortopedi dan Traumatologi' },
+  { name: 'dr. Lattuhar Hari, SP. OG', position: 'Dokter Spesialis Obygyn' },
+  { name: 'dr. Yanuar Wicaksana Sumasta, SP.U', position: 'Dokter Spesialis Urologi' },
+  { name: 'dr. Rasyidah, Sp.Rad', position: 'Dokter Spesialis Radiologi' },
+  { name: 'dr. Leonardo Daniel Mustopo, Sp. K.F.R', position: 'Dokter Spesialis Rehabilitas Medik' },
+  { name: 'dr. Andrew Limantoro, Sp. A', position: 'Dokter Spesialis Anak' },
+  { name: 'drg. Ryan Pandu Digjaya, Sp. BMM', position: 'Dokter Spesialis  Bedah Mulut' },
+  { name: 'dr. Annisa Nurina Ayuningtyas, Sp.M', position: 'Dokter Spesialis Mata' },
+  { name: 'dr. Carolina Hajir, Sp.PD', position: 'Dokter Spesialis Penyakit Dalam' },
+  { name: 'dr. Ni Putu Alit Trisna, Sp.JP', position: 'Dokter Spesialis Jantung' },
+  { name: 'dr. Emilia, Sp. PD K-GH, FINASIM', position: 'Dokter Spesialis Penyakit Dalam' },
+  { name: 'dr. Satalina Mutiara,Sp.N', position: 'Dokter Spesialis Neourologi' },
+  { name: 'dr. Ika Sari Gunawan, Msc, Sp.A', position: 'Dokter Spesialis Anak' },
+  { name: 'dr. Galih Sahid Wicaksono,Sp. An', position: 'Dokter Spesialis Anestesi' },
+  { name: 'dr. M. Ricky Ramadhian, Sp. Rad', position: 'Dokter Spesialis Radiologi' },
+  { name: 'drg. Yuni Rahmawati, Sp. BMM', position: 'Dokter Spesialis  Bedah Mulut' },
+  { name: 'dr. Putri Dwi Kartini, Sp.M', position: 'Dokter Spesialis Mata' },
+  { name: 'dr. Anantyo Kusuma Yudha, Sp. THT-TL', position: 'Dokter Spesialis Telinga, Hidung, Tenggorokan, Bedah Kepala Leher' },
+  { name: 'dr. Rama Gindo Imansuri, Sp. OG', position: 'Dokter Spesialis Obygyn' },
+  { name: 'dr. Muhammad Hadi Wijaya, Sp. PD', position: 'Dokter Spesialis Penyakit Dalam' },
+  { name: 'dr. Adhari Aji Purnomo, Sp.P', position: 'Dokter Spesialis Paru' },
+  { name: 'dr. Muhammad Maulana, Sp. M', position: 'Dokter Spesialis Mata' },
+  { name: 'dr. Arif Ismail. Sp.B.S', position: 'Dokter Spesialis Bedah Saraf' },
+  { name: 'dr. Lilianty Fauzi, Sp. M', position: 'Dokter Spesialis Mata' },
+  { name: 'dr. Dina Evyana, Sp.Dv', position: 'Dokter Spesialis Dermatologi dan Venereologi' },
+  { name: 'dr. Andre Nugraha Nurman, Sp. JP', position: 'Dokter Spesialis Penyakit Jantung Dan Pembuluh Darah' },
+  { name: 'dr. Resti Ramdani, Sp.T.H.T.B.K.L', position: 'Dokter Spesialis Ilmu Kesehatan THT.BKL' },
+  { name: 'dr.Tanti Adelia Kesuma, Sp.PK', position: 'Dokter Spesialis Pantologi Klinik' },
+  { name: 'dr. Satria Aji Prasidha, Sp.KG', position: 'Dokter Spesialis Konservasi Gigi' },
+  { name: 'drg. Siti Agi Nayanggisya', position: 'Dokter Gigi' },
+  { name: 'drg. Kharisma Galuh', position: 'Dokter Gigi' },
+  { name: 'drg. Nevilia Putri Riandani', position: 'Dokter Gigi' },
 ];
 
+// This remains a Server Component
 export default function DoctorsPage() {
+  // Doctor data is defined here (or fetched in a real app)
+  // The filtering and display logic is delegated to the Client Component
+
   return (
-    // Removed py-8 md:py-12 from here, relies on layout.tsx main padding
     <div className="container mx-auto px-4">
-      <h1 className="text-3xl md:text-4xl font-bold mb-8 md:mb-12 text-center text-green-900">
-        Tim Dokter Profesional Kami
+      <h1 className="text-3xl md:text-4xl font-bold mb-8 text-center text-green-900">
+        Cari Dokter Kami
       </h1>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        {staticDoctors.map((doctor, index) => (
-          <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 group flex flex-col">
-            {/* Placeholder Image */}
-            <div className="bg-gray-200 h-48 w-full flex items-center justify-center text-gray-400 group-hover:opacity-90 transition-opacity">
-              <Users size={48} />
-            </div>
-            <div className="p-5 text-center flex flex-col flex-grow">
-              <h2 className="text-lg font-semibold mb-1 text-green-800">{doctor.name}</h2>
-              <p className="text-green-600 font-medium text-sm mb-3">{doctor.specialization}</p>
-              <p className="text-gray-600 text-xs mb-4 flex-grow">{doctor.description}</p>
-              {/* Placeholder for link to full profile */}
-              <a href="#" className="text-sm text-green-700 hover:underline mt-auto">
-                Lihat Profil Lengkap &rarr;
-              </a>
-            </div>
-          </div>
-        ))}
-      </div>
+      {/* Render the Client Component responsible for filtering and display */}
+      <DoctorFilterList doctors={realDoctors} />
+
     </div>
   );
 }
