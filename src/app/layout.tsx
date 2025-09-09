@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Header from "@/components/layout/Header"; // Import Header
 import Footer from "@/components/layout/Footer"; // Import Footer
+import BackToTop from "@/components/ui/BackToTop"; // Import BackToTop
 import "./globals.css";
 
 const geistSans = Geist({
@@ -32,10 +33,11 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`} // Add flex classes
       >
         <Header /> {/* Add Header */}
-        <main className="flex-grow container mx-auto px-4 py-8"> {/* Add main wrapper */}
+        <main className="flex-grow"> {/* Remove container styles since pages handle their own layout */}
           {children}
         </main>
         <Footer /> {/* Add Footer */}
+        <BackToTop /> {/* Add BackToTop button */}
       </body>
     </html>
   );
